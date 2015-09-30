@@ -10,9 +10,11 @@
 var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 // api support
-var terminalApi = require('./lib/terminal-api');
+var terminalApi = require('./lib/terminal/terminal-api');
+var administradores_router = require('./lib/administradores/administradores_controller');
 
 // read app parameters (host and port for the API)
 var config = require('./config.json');
@@ -26,6 +28,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+
+// using cors for cross class
+app.use(cors());
 
 // mounting routes
 var router = express.Router();
@@ -55,9 +60,10 @@ router.route('/terminal/records')
 router.route('/terminal/set-date-time')	
 	.post(terminalApi.setDateTime);
 
-
 // -- registering routes
 app.use('/api',router);
+app.use('/api/administradores', administradores_router);
+
 // -- start server
 app.listen(config.apiPort);
 
