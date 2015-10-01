@@ -15,6 +15,7 @@ var cors = require('cors');
 // api support
 var terminalApi = require('./lib/terminal/terminal-api');
 var administradores_router = require('./lib/administradores/administradores_controller');
+var version_router = require('./lib/version/version_controller');
 
 // read app parameters (host and port for the API)
 var config = require('./config.json');
@@ -63,6 +64,8 @@ router.route('/terminal/set-date-time')
 // -- registering routes
 app.use('/api',router);
 app.use('/api/administradores', administradores_router);
+app.use('/api/version', version_router);
+
 
 // -- start server
 app.listen(config.apiPort);
