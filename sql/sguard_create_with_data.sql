@@ -19,14 +19,17 @@ USE `sguard`;
 DROP TABLE IF EXISTS `administradores`;
 
 CREATE TABLE `administradores` (
-  `administradorId` int(11) DEFAULT NULL,
+  `administradorId` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(765) DEFAULT NULL,
   `login` varchar(765) DEFAULT NULL,
   `password` varchar(765) DEFAULT NULL,
-  `email` varchar(765) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `email` varchar(765) DEFAULT NULL,
+  PRIMARY KEY (`administradorId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `administradores` */
+
+insert  into `administradores`(`administradorId`,`nombre`,`login`,`password`,`email`) values (2,'MI segundo adm','ad2','ad2',NULL),(3,'Mi tercer adm','ad3','ad3',NULL),(4,'Mi nuevoxYx administrador','admin','admin',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
