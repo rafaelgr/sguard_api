@@ -65,13 +65,60 @@ CREATE TABLE `rondas` (
   `rondaId` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   PRIMARY KEY (`rondaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondas` */
 
 insert  into `rondas`(`rondaId`,`nombre`) values 
-(1,'Ronda Exterior'),
+(1,'Ronda Exterior 1500'),
 (2,'Ronda Interior');
+
+/*Table structure for table `rondas_realizadas` */
+
+DROP TABLE IF EXISTS `rondas_realizadas`;
+
+CREATE TABLE `rondas_realizadas` (
+  `rondaRealizadaId` int(11) NOT NULL AUTO_INCREMENT,
+  `rondaId` int(11) DEFAULT NULL,
+  `vigilanteId` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `hora` time DEFAULT NULL,
+  `resultado` text,
+  PRIMARY KEY (`rondaRealizadaId`),
+  KEY `ref_ronda2` (`rondaId`),
+  KEY `ref_vigilante` (`vigilanteId`),
+  CONSTRAINT `ref_ronda2` FOREIGN KEY (`rondaId`) REFERENCES `rondas` (`rondaId`),
+  CONSTRAINT `ref_vigilante` FOREIGN KEY (`vigilanteId`) REFERENCES `vigilantes` (`vigilanteId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `rondas_realizadas` */
+
+insert  into `rondas_realizadas`(`rondaRealizadaId`,`rondaId`,`vigilanteId`,`fecha`,`hora`,`resultado`) values 
+(2,1,4,'2015-10-04','15:16:00','CORRECTO');
+
+/*Table structure for table `rondas_realizadaspuntos` */
+
+DROP TABLE IF EXISTS `rondas_realizadaspuntos`;
+
+CREATE TABLE `rondas_realizadaspuntos` (
+  `rondaRealizadaPuntoId` int(11) NOT NULL AUTO_INCREMENT,
+  `rondaRealizadaId` int(11) DEFAULT NULL,
+  `puntoId` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `hora` time DEFAULT NULL,
+  `resultado` text,
+  PRIMARY KEY (`rondaRealizadaPuntoId`),
+  KEY `ref_rondaRealizada` (`rondaRealizadaId`),
+  KEY `ref_punto2` (`puntoId`),
+  CONSTRAINT `ref_punto2` FOREIGN KEY (`puntoId`) REFERENCES `puntos` (`puntoId`),
+  CONSTRAINT `ref_rondaRealizada` FOREIGN KEY (`rondaRealizadaId`) REFERENCES `rondas_realizadas` (`rondaRealizadaId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `rondas_realizadaspuntos` */
+
+insert  into `rondas_realizadaspuntos`(`rondaRealizadaPuntoId`,`rondaRealizadaId`,`puntoId`,`fecha`,`hora`,`resultado`) values 
+(3,2,1,'2015-10-04','16:00:00','CORRECTO'),
+(4,2,2,NULL,NULL,'FALTA');
 
 /*Table structure for table `rondaspuntos` */
 
@@ -87,14 +134,14 @@ CREATE TABLE `rondaspuntos` (
   KEY `ref_punto` (`puntoId`),
   CONSTRAINT `ref_punto` FOREIGN KEY (`puntoId`) REFERENCES `puntos` (`puntoId`),
   CONSTRAINT `ref_ronda` FOREIGN KEY (`rondaId`) REFERENCES `rondas` (`rondaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondaspuntos` */
 
 insert  into `rondaspuntos`(`rondaPuntoId`,`orden`,`rondaId`,`puntoId`) values 
 (1,1,1,1),
 (4,1,2,1),
-(6,2,1,2);
+(13,3,1,2);
 
 /*Table structure for table `vigilantes` */
 
@@ -105,9 +152,12 @@ CREATE TABLE `vigilantes` (
   `nombre` varchar(255) NOT NULL,
   `tag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`vigilanteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `vigilantes` */
+
+insert  into `vigilantes`(`vigilanteId`,`nombre`,`tag`) values 
+(4,'Garcia Pedroche, Manuel','0014552');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
