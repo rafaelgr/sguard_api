@@ -19,6 +19,7 @@ var version_router = require('./lib/version/version_controller');
 var vigilantes_router = require('./lib/vigilantes/vigilantes_controller');
 var puntos_router = require('./lib/puntos/puntos_controller');
 var rondas_router = require('./lib/rondas/rondas_controller');
+var rondas_realizadas_router = require('./lib/rondas_realizadas/rondas_realizadas_controller');
 
 // read app parameters (host and port for the API)
 var config = require('./config.json');
@@ -71,6 +72,7 @@ app.use('/api/version', version_router);
 app.use('/api/vigilantes', vigilantes_router);
 app.use('/api/puntos', puntos_router);
 app.use('/api/rondas', rondas_router);
+app.use('/api/rondas-realizadas', rondas_realizadas_router);
 
 
 // -- start server
