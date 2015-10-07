@@ -42,11 +42,11 @@ CREATE TABLE `descargas` (
   `hora` time DEFAULT NULL,
   `resultado` text,
   PRIMARY KEY (`descargaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 /*Data for the table `descargas` */
 
-insert  into `descargas`(`descargaId`,`nterminal`,`fecha`,`hora`,`resultado`) values (2,'112339','2015-10-07','13:32:15','CARGA SIMPLE TERMINAL [SIN PROCESO]'),(3,'112339','2015-10-07','13:33:42','CARGA SIMPLE TERMINAL [SIN PROCESO]'),(4,'112339','2015-10-07','13:36:32','CARGA SIMPLE TERMINAL [SIN PROCESO]'),(5,'112339','2015-10-07','14:07:06','CARGA SIMPLE TERMINAL [SIN PROCESO]'),(6,'112339','2015-10-07','14:07:59','CARGA SIMPLE TERMINAL [SIN PROCESO]');
+insert  into `descargas`(`descargaId`,`nterminal`,`fecha`,`hora`,`resultado`) values (21,'112339','2015-10-07','18:02:27','CARGA SIMPLE TERMINAL [SIN PROCESO]'),(22,'112339','2015-10-07','18:06:04','CARGA SIMPLE TERMINAL [SIN PROCESO]'),(23,'112339','2015-10-07','18:09:26','CARGA SIMPLE TERMINAL [SIN PROCESO]'),(24,'112339','2015-10-07','18:12:25','CARGA SIMPLE TERMINAL [SIN PROCESO]');
 
 /*Table structure for table `descargas_lineas` */
 
@@ -58,12 +58,14 @@ CREATE TABLE `descargas_lineas` (
   `tag` varchar(255) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `hora` time DEFAULT NULL,
+  `tipo` varchar(255) DEFAULT NULL,
+  `tipoId` int(11) DEFAULT NULL,
   PRIMARY KEY (`descargaLineaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
 
 /*Data for the table `descargas_lineas` */
 
-insert  into `descargas_lineas`(`descargaLineaId`,`descargaId`,`tag`,`fecha`,`hora`) values (1,5,'0004044154','2015-10-07','12:25:13'),(2,5,'0406215258','2015-10-07','13:10:49'),(3,5,'0406213943','2015-10-07','13:10:52'),(4,5,'0403669508','2015-10-07','13:10:55');
+insert  into `descargas_lineas`(`descargaLineaId`,`descargaId`,`tag`,`fecha`,`hora`,`tipo`,`tipoId`) values (35,21,'0004044154','2015-10-07','18:00:44','VIGILANTE',6),(36,21,'0406213943','2015-10-07','18:00:47',NULL,NULL),(37,21,'0406215258','2015-10-07','18:00:50','PUNTO',5),(38,21,'0406219258','2015-10-07','18:00:53','PUNTO',6),(39,21,'0406220547','2015-10-07','18:00:57','RONDA',14),(40,21,'0403669508','2015-10-07','18:01:00','PUNTO',8),(41,21,'0406209033','2015-10-07','18:01:03','PUNTO',7),(42,21,'0004049464','2015-10-07','18:01:09',NULL,NULL),(43,21,'0406220547','2015-10-07','18:01:11','RONDA',14),(44,21,'0403669508','2015-10-07','18:01:13','PUNTO',8),(45,21,'0406209033','2015-10-07','18:01:15','PUNTO',7),(46,21,'0406213943','2015-10-07','18:01:19',NULL,NULL),(47,21,'0406219258','2015-10-07','18:01:21','PUNTO',6),(48,21,'0406215258','2015-10-07','18:01:23','PUNTO',5),(49,21,'0004044154','2015-10-07','18:01:32','VIGILANTE',6),(50,21,'0403669508','2015-10-07','18:01:34','PUNTO',8),(51,21,'0406209033','2015-10-07','18:01:36','PUNTO',7),(52,21,'0406215258','2015-10-07','18:01:40','PUNTO',5),(53,21,'0406220547','2015-10-07','18:01:43','RONDA',14),(54,21,'0406219258','2015-10-07','18:01:45','PUNTO',6),(55,21,'0406215258','2015-10-07','18:01:46','PUNTO',5),(56,21,'0403669508','2015-10-07','18:01:47','PUNTO',8),(57,21,'0004049464','2015-10-07','18:01:51',NULL,NULL),(58,21,'0406213943','2015-10-07','18:01:53',NULL,NULL),(59,21,'0406215258','2015-10-07','18:01:54','PUNTO',5),(60,21,'0403669508','2015-10-07','18:01:55','PUNTO',8),(61,22,'0004049464','2015-10-07','18:05:37','VIGILANTE',7),(62,22,'0406220547','2015-10-07','18:05:39','RONDA',14),(63,22,'0403669508','2015-10-07','18:05:41','PUNTO',8),(64,22,'0406209033','2015-10-07','18:05:43','PUNTO',7),(65,22,'0406213943','2015-10-07','18:05:48',NULL,NULL),(66,22,'0406215258','2015-10-07','18:05:50','PUNTO',5),(67,22,'0406219258','2015-10-07','18:05:51','PUNTO',6),(68,23,'0004044154','2015-10-07','18:08:50','VIGILANTE',6),(69,23,'0406213943','2015-10-07','18:08:52',NULL,NULL),(70,23,'0406215258','2015-10-07','18:08:53','PUNTO',5),(71,23,'0406219258','2015-10-07','18:08:54','PUNTO',6),(72,23,'0406220547','2015-10-07','18:08:56','RONDA',14),(73,23,'0406209033','2015-10-07','18:08:57','PUNTO',7),(74,23,'0403669508','2015-10-07','18:08:58','PUNTO',8),(75,24,'0406220547','2015-10-07','18:11:37','RONDA',14);
 
 /*Table structure for table `edificios` */
 
@@ -76,11 +78,11 @@ CREATE TABLE `edificios` (
   PRIMARY KEY (`edificioId`),
   KEY `ref_grupo` (`grupoId`),
   CONSTRAINT `ref_grupo` FOREIGN KEY (`grupoId`) REFERENCES `grupos` (`grupoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `edificios` */
 
-insert  into `edificios`(`edificioId`,`grupoId`,`nombre`) values (3,3,'Obra central'),(4,4,'En L2'),(5,3,'Hipercasa');
+insert  into `edificios`(`edificioId`,`grupoId`,`nombre`) values (6,5,'Edificio principal');
 
 /*Table structure for table `grupos` */
 
@@ -90,11 +92,11 @@ CREATE TABLE `grupos` (
   `grupoId` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`grupoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `grupos` */
 
-insert  into `grupos`(`grupoId`,`nombre`) values (3,'Grupo L1'),(4,'Grupo L2');
+insert  into `grupos`(`grupoId`,`nombre`) values (5,'GRUPO 1');
 
 /*Table structure for table `puntos` */
 
@@ -109,11 +111,11 @@ CREATE TABLE `puntos` (
   `cubiculo` varchar(255) DEFAULT NULL,
   `observaciones` text,
   PRIMARY KEY (`puntoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `puntos` */
 
-insert  into `puntos`(`puntoId`,`nombre`,`edificioId`,`tag`,`cota`,`cubiculo`,`observaciones`) values (1,'Control 01',3,'00111','45',NULL,'Este es un punto interesante'),(2,'Control 02',4,'014552',NULL,NULL,NULL),(3,'FGGDT7899',4,'0045669','788','899','Hola que hse'),(4,'Mi punto',3,'0406219258','C1','CB45',NULL);
+insert  into `puntos`(`puntoId`,`nombre`,`edificioId`,`tag`,`cota`,`cubiculo`,`observaciones`) values (5,'Control 1',6,'0406215258','C1','CB1','Primer punto'),(6,'Control 2',6,'0406219258','C1','CB2','Segundo punto'),(7,'Control 3',6,'0406209033','C1','CB3','Tercer punto'),(8,'Punto Flotante',6,'0403669508','CF','CBF','El punto que flota');
 
 /*Table structure for table `rondas` */
 
@@ -125,11 +127,11 @@ CREATE TABLE `rondas` (
   `tag` varchar(255) DEFAULT NULL,
   `tagf` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`rondaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondas` */
 
-insert  into `rondas`(`rondaId`,`nombre`,`tag`,`tagf`) values (1,'Ronda Exterior 1500',NULL,NULL),(2,'Ronda Interior',NULL,NULL),(11,'La ronda de noche','0406215258','0403669508'),(12,'Vamos a ver la ronda','0406215258','0406215258');
+insert  into `rondas`(`rondaId`,`nombre`,`tag`,`tagf`) values (13,'Ronda 01-02','0406215258',NULL),(14,'R-03-F','0406220547',NULL);
 
 /*Table structure for table `rondas_realizadas` */
 
@@ -150,8 +152,6 @@ CREATE TABLE `rondas_realizadas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondas_realizadas` */
-
-insert  into `rondas_realizadas`(`rondaRealizadaId`,`rondaId`,`vigilanteId`,`fecha`,`hora`,`resultado`) values (2,1,4,'2015-10-04','15:16:00','FALTAN PUNTOS'),(4,2,4,'2015-10-05','20:16:00','CORRECTO'),(5,2,5,'2015-10-05','20:16:00','CORRECTO');
 
 /*Table structure for table `rondas_realizadaspuntos` */
 
@@ -190,11 +190,11 @@ CREATE TABLE `rondaspuntos` (
   KEY `ref_punto` (`puntoId`),
   CONSTRAINT `ref_punto` FOREIGN KEY (`puntoId`) REFERENCES `puntos` (`puntoId`),
   CONSTRAINT `ref_ronda` FOREIGN KEY (`rondaId`) REFERENCES `rondas` (`rondaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rondaspuntos` */
 
-insert  into `rondaspuntos`(`rondaPuntoId`,`orden`,`rondaId`,`puntoId`) values (1,1,1,1),(4,1,2,1),(14,2,1,2),(17,1,11,1),(18,2,11,4),(19,2,12,4),(20,3,12,1);
+insert  into `rondaspuntos`(`rondaPuntoId`,`orden`,`rondaId`,`puntoId`) values (21,1,13,5),(22,2,13,6),(23,1,14,7),(24,2,14,8);
 
 /*Table structure for table `vigilantes` */
 
@@ -206,11 +206,11 @@ CREATE TABLE `vigilantes` (
   `tag` varchar(255) DEFAULT NULL,
   `tagf` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`vigilanteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `vigilantes` */
 
-insert  into `vigilantes`(`vigilanteId`,`nombre`,`tag`,`tagf`) values (4,'Garcia Pedroche, Manuel','0004044154',NULL),(5,'Mark Twain','004564564',NULL);
+insert  into `vigilantes`(`vigilanteId`,`nombre`,`tag`,`tagf`) values (6,'Fernando Colomo','0004044154',NULL),(7,'Pedro Martinez','0004049464',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
